@@ -1,0 +1,29 @@
+---
+abstract: 'work with an RPM'
+author:
+  - 'Chris Weyl <cweyl@alumni.drew.edu>'
+build_requires:
+  Test::More: 0
+distribution_type: module
+generated_by: 'Module::Install version 0.77'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Archive-RPM
+no_index:
+  directory:
+    - inc
+    - t
+requires:
+  DateTime: 0
+  Moose: 0
+  MooseX::AttributeHelpers: 0
+  MooseX::Types::DateTime: 0
+  MooseX::Types::Path::Class: 0
+  Path::Class: 0
+  RPM2: 0.67
+  namespace::clean: 0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.02
