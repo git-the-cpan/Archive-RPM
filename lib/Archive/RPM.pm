@@ -33,7 +33,7 @@ use namespace::clean -except => 'meta';
 
 use overload '""' => sub { shift->rpm->basename };
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 # debugging
 #use Smart::Comments '###', '####';

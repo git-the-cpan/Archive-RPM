@@ -1,5 +1,8 @@
 Revision history for Archive-RPM
 
+0.03    Tue Mar  3 22:06:44 PST 2009
+- correct license in Makefile.PL
+
 0.02    Sat Feb 28 16:00:13 PST 2009
 - First version, released on an unsuspecting world.
 

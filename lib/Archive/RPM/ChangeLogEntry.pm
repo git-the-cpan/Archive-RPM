@@ -26,7 +26,7 @@ use namespace::clean except => 'meta';
 
 use overload '""' => sub { shift->as_string };
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 has text => (is => 'ro', isa => 'Str', required => 1);
 has time => (is => 'ro', isa => DateTime, coerce => 1, required => 1);
