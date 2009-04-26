@@ -1,9 +1,13 @@
 Revision history for Archive-RPM
 
+0.04 Sun Apr 26 00:26:27 PDT 2009
+- drop #! line in t/00-load.t that was confusing koji/mock 
+
 0.03    Tue Mar  3 22:06:44 PST 2009
 - correct license in Makefile.PL
 
 0.02    Sat Feb 28 16:00:13 PST 2009
 - First version, released on an unsuspecting world.
 
-0.01 - bundled with Fedora::App::ReviewTool
+0.01 
+- bundled with Fedora::App::ReviewTool
