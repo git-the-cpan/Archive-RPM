@@ -7,6 +7,7 @@ inc/Module/Install/Can.pm
 inc/Module/Install/External.pm
 inc/Module/Install/ExtraTests.pm
 inc/Module/Install/Fetch.pm
+inc/Module/Install/GithubMeta.pm
 inc/Module/Install/Include.pm
 inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm

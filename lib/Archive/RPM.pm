@@ -33,7 +33,7 @@ use namespace::clean -except => 'meta';
 
 use overload '""' => sub { shift->rpm->basename };
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # debugging
 #use Smart::Comments '###', '####';
@@ -57,22 +57,23 @@ sub BUILD {
 
 has rpm => (is => 'ro', isa => File, coerce => 1, required => 1);
 
+sub nvr { (my $nvr = shift->as_nvre) =~ s/^.*://; $nvr }
+
 has _header => (
     is         => 'ro', 
     isa        => 'RPM2::Header', 
     lazy_build => 1,
     
     # http://www.perlmonks.org/?node_id=588315 kick ass!
-    handles => qr/^(?!(?s:.*)^(files|changelog)$)/, 
+    handles => qr/^(?!(?s:.*)^(files|changelog|nvr)$)/,
 );
 
 sub _build__header { RPM2->open_package(shift->rpm) }
 
 # lazy cheats! :-)
-sub nvre      { shift->as_nvre                               }
-sub nvr       { (my $nvr = shift->as_nvre) =~ s/^.*://; $nvr }
-sub is_srpm   { shift->is_source_package                     }
-sub is_source { shift->is_source_package                     }
+sub nvre      { shift->as_nvre           }
+sub is_srpm   { shift->is_source_package }
+sub is_source { shift->is_source_package }
 
 has auto_cleanup => (is => 'ro', isa => 'Bool', default => 0);
 
