@@ -4,9 +4,8 @@
 #
 # Author:  Chris Weyl (cpan:RSRCHBOY), <cweyl@alumni.drew.edu>
 # Company: No company, personal work
-# Created: 02/25/2009 12:45:36 AM PST
 #
-# Copyright (c) 2009 Chris Weyl <cweyl@alumni.drew.edu>
+# Copyright (c) 2009, 2010 Chris Weyl <cweyl@alumni.drew.edu>
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,33 +17,34 @@
 package Archive::RPM;
 
 use Moose;
+use MooseX::MarkAsMethods autoclean => 1;
 use MooseX::AttributeHelpers;
 use MooseX::Types::Path::Class ':all';
 
-use English qw{ -no_match_vars };  # Avoids regex performance penalty
+use overload '""' => sub { shift->rpm->basename };
 
-use File::Temp qw{ tempdir };
+use English '-no_match_vars';
+use File::Temp 'tempdir';
 use Path::Class;
 use RPM2 0.67;
 
 use Archive::RPM::ChangeLogEntry;
 
-use namespace::clean -except => 'meta';
+our $VERSION = '0.06';
 
-use overload '""' => sub { shift->rpm->basename };
-
-our $VERSION = '0.05';
+with 'MooseX::Traits';
+has '+_trait_namespace' => (default => 'Archive::RPM::TraitFor');
 
 # debugging
 #use Smart::Comments '###', '####';
 
-sub BUILDARGS {
-    my $class = shift @_;
+around BUILDARGS => sub {
+    my ($orig, $self) = (shift, shift);
 
     # if it's a single non-ref value, assume it's meant for 'rpm'
-    return { rpm => $_[0] } if @_ == 1 && (!ref $_[0] || ref $_[0] ne 'HASH');
-    return $class->SUPER::BUILDARGS(@_);
-}
+    return $self->$orig({ rpm => $_[0] }) if @_ == 1 && (!ref $_[0] || ref $_[0] ne 'HASH');
+    return $self->$orig(@_);
+};
 
 sub BUILD {
     my $self = shift @_;
@@ -120,7 +120,6 @@ has _files => (
         'elements'  => 'files',
         'first'     => 'first_file',
         'last'      => 'last_file',
-        #'get'      => 'get_file',
         'join'      => 'join_files',
     },
 );
@@ -131,7 +130,7 @@ sub _build__files {
 
     # get all our entries and return
     $self->extracted_to->recurse(callback => sub { push @files, shift });
-    ### @files
+
     shift @files;
     return \@files;
 }
@@ -144,8 +143,6 @@ has _cl => (
     lazy_build => 1,
     
     provides => {
-        #'empty'     => 'has_files',
-        #'join'      => 'join_files',
         'count'     => 'num_changelog_entries',
         'map'       => 'map_changelog_entries',
         'find'      => 'find_changelog_entry',
@@ -176,7 +173,7 @@ __END__
 
 =head1 NAME
 
-Archive::RPM - work with an RPM
+Archive::RPM - Work with a RPM
 
 =head1 SYNOPSIS
 
@@ -194,7 +191,18 @@ actual data.  We access this information by leveraging L<RPM2> where we can,
 and by "exploding" the rpm (with rpm2cpio and cpio) when we need information
 we can't get through RPM2.
 
-=head1 SUBROUTINES/METHODS
+=head1 TRAITS
+
+This package allows for the application of various "TraitFor" style traits
+through the with_traits() function, e.g.:
+
+    Archive::RPM->with_traits('Foo')->new(...);
+
+By default, we look for traits in the "Archive::RPM::TraitsFor" namespace,
+though this can be overridden by prepending a "+" to the full package name of
+the trait.
+
+=head1 METHODS
 
 An object of this class represents an actual RPM, somewhere on the filesystem.
 We provide all the methods L<RPM2::Header> does, as well as additional
@@ -310,16 +318,9 @@ We tend to complain and die loudly on any errors.
 
 L<RPM2>
 
-This package is part of the Fedora Project's Perl SIG work.  For more
-information, see:
-
-    http://fedoraproject.org
-    http://fedoraproject.org/wiki/Perl
-    http://camelus.fedorahosted.org
-
 =head1 LIMITATIONS
 
-Our documentation is clearly lacking, sadly.
+Our documentation and test suite is clearly lacking, sadly.
 
 We also have to explode the rpm for anything more intense than simply looking
 at the header for info.  While this isn't really a _horrible_ thing, it's
@@ -347,7 +348,7 @@ Chris Weyl  <cweyl@alumni.drew.edu>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2009 Chris Weyl <cweyl@alumni.drew.edu>
+Copyright (c) 2009, 2010 Chris Weyl <cweyl@alumni.drew.edu>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public

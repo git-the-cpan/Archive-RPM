@@ -1,5 +1,12 @@
 Revision history for Archive-RPM
 
+
+0.06 Thu May 13 2010
+- with MooseX::Traits now, the better to be TraitFor'ed with
+- minor doc and code updates
+- switch to MooseX::MarkAsMethods, to clean our namespaces while retaining our
+  overloads
+
 0.05 Sat Feb 13 21:05:55 PST 2010
 - explicitly exclude 'nvr' from being handled by _handle; this was breaking
   with RPM 4.8.x

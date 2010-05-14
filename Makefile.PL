@@ -7,16 +7,20 @@ all_from 'lib/Archive/RPM.pm';
 author   'Chris Weyl <cweyl@alumni.drew.edu>';
 license  'lgpl';
 
-requires 'namespace::clean';
+readme_from 'lib/Archive/RPM.pm';
+readme_markdown_from 'lib/Archive/RPM.pm';
 
 requires 'Moose';
 requires 'MooseX::AttributeHelpers';
+requires 'MooseX::MarkAsMethods';
 requires 'MooseX::Types::DateTime';
 requires 'MooseX::Types::Path::Class';
+requires 'MooseX::Traits';
 
-requires 'RPM2' => '0.68';
 requires 'DateTime';
+requires 'English';
 requires 'Path::Class';
+requires 'RPM2' => '0.68';
 
 requires_external_bin 'rpm2cpio';
 requires_external_bin 'cpio';

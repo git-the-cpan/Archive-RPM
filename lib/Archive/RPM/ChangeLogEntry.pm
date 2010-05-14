@@ -4,9 +4,8 @@
 #
 # Author:  Chris Weyl (cpan:RSRCHBOY), <cweyl@alumni.drew.edu>
 # Company: No company, personal work
-# Created: 02/28/2009 03:42:54 PM PST
 #
-# Copyright (c) 2009 Chris Weyl <cweyl@alumni.drew.edu>
+# Copyright (c) 2009,2010 Chris Weyl <cweyl@alumni.drew.edu>
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,15 +17,14 @@
 package Archive::RPM::ChangeLogEntry;
 
 use Moose;
+use MooseX::MarkAsMethods autoclean => 1;
 use MooseX::Types::DateTimeX ':all';
-
-use DateTime;
-
-use namespace::clean except => 'meta';
 
 use overload '""' => sub { shift->as_string };
 
-our $VERSION = '0.04';
+use DateTime;
+
+our $VERSION = '0.06';
 
 has text => (is => 'ro', isa => 'Str', required => 1);
 has time => (is => 'ro', isa => DateTime, coerce => 1, required => 1);
@@ -48,7 +46,7 @@ __END__
 
 =head1 NAME
 
-Archive::RPM::ChangeLogEntry - An RPM changelog entry
+Archive::RPM::ChangeLogEntry - A RPM %changelog entry
 
 =head1 DESCRIPTION
 
@@ -89,7 +87,7 @@ Chris Weyl  <cweyl@alumni.drew.edu>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2009 Chris Weyl <cweyl@alumni.drew.edu>
+Copyright (c) 2009, 2010 Chris Weyl <cweyl@alumni.drew.edu>
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
