@@ -22,10 +22,10 @@ no_index:
 provides:
   Archive::RPM:
     file: lib/Archive/RPM.pm
-    version: 0.06
+    version: 0.07
   Archive::RPM::ChangeLogEntry:
     file: lib/Archive/RPM/ChangeLogEntry.pm
-    version: 0.06
+    version: 0.07
 requires:
   DateTime: 0
   English: 0
@@ -34,6 +34,7 @@ requires:
   MooseX::MarkAsMethods: 0
   MooseX::Traits: 0
   MooseX::Types::DateTime: 0
+  MooseX::Types::DateTimeX: 0
   MooseX::Types::Path::Class: 0
   Path::Class: 0
   RPM2: 0.68
@@ -41,4 +42,4 @@ resources:
   homepage: http://github.com/RsrchBoy/archive-rpm/tree
   license: http://opensource.org/licenses/lgpl-license.php
   repository: git://github.com/RsrchBoy/archive-rpm.git
-version: 0.06
+version: 0.07

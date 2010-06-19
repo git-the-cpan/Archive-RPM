@@ -14,6 +14,7 @@ requires 'Moose';
 requires 'MooseX::AttributeHelpers';
 requires 'MooseX::MarkAsMethods';
 requires 'MooseX::Types::DateTime';
+requires 'MooseX::Types::DateTimeX';
 requires 'MooseX::Types::Path::Class';
 requires 'MooseX::Traits';
 

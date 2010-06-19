@@ -24,7 +24,7 @@ use overload '""' => sub { shift->as_string };
 
 use DateTime;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 has text => (is => 'ro', isa => 'Str', required => 1);
 has time => (is => 'ro', isa => DateTime, coerce => 1, required => 1);

@@ -30,7 +30,7 @@ use RPM2 0.67;
 
 use Archive::RPM::ChangeLogEntry;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 with 'MooseX::Traits';
 has '+_trait_namespace' => (default => 'Archive::RPM::TraitFor');

@@ -1,5 +1,7 @@
 Revision history for Archive-RPM
 
+0.07 Sat Jun 19 2010
+- make MooseX::Types::DateTimeX as an explicit dependency
 
 0.06 Thu May 13 2010
 - with MooseX::Traits now, the better to be TraitFor'ed with
